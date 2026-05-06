@@ -12,7 +12,7 @@ public class CalculatorTest {
         // Kiểm tra xem 2 + 3 có đúng bằng 5 không
         assertEquals(5, calculator.add(2, 3), "Phép cộng phải trả về kết quả chính xác");
     }
-    @Testgit add .
+    @Test
     public void testCrossPlatformPath() {
         java.nio.file.Path path = java.nio.file.Paths.get(
                 "src", "test", "resources", "data.txt"
