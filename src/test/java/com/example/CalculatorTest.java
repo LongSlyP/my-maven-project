@@ -13,11 +13,11 @@ public class CalculatorTest {
         assertEquals(5, calculator.add(2, 3), "Phép cộng phải trả về kết quả chính xác");
     }
     @Test
-    public void testWindowsPathIssue() {
-        String filePath = "src\\test\\resources\\data.txt";
+    public void testCrossPlatformPath() {
+        java.nio.file.Path path = java.nio.file.Paths.get(
+                "src", "test", "resources", "data.txt"
+        );
 
-        java.io.File file = new java.io.File(filePath);
-
-        assertTrue(file.exists(), "File phải tồn tại");
+        assertTrue(java.nio.file.Files.exists(path), "File phải tồn tại");
     }
 }
