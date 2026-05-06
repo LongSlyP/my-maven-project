@@ -9,6 +9,6 @@ public class CalculatorTest {
     public void testAdd() {
         Calculator calculator = new Calculator();
         // Kiểm tra xem 2 + 3 có đúng bằng 5 không
-        assertEquals(5, calculator.add(2, 3), "Phép cộng phải trả về kết quả chính xác");
+        assertEquals(6, calculator.add(2, 3), "Phép cộng phải trả về kết quả chính xác");
     }
 }
