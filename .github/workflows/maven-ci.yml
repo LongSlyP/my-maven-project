@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -28,14 +27,17 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build and test with Maven
+      - name: Build, test and verify coverage
         run: mvn clean verify
-
-      - name: Package application
-        run: mvn package
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
           name: jar-${{ matrix.os }}
           path: target/*.jar
+
+      - name: Upload JaCoCo coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report-${{ matrix.os }}
+          path: target/site/jacoco/
