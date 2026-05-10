@@ -6,11 +6,15 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
       matrix:
         os:
           - ubuntu-latest
@@ -21,14 +25,20 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 17 with Maven cache
+        id: setup-java
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: 'maven'
+          cache-dependency-path: '**/pom.xml'
+
+      - name: Show Maven cache status
+        run: 'echo "Maven cache hit: ${{ steps.setup-java.outputs.cache-hit }}"'
 
       - name: Build, test and verify coverage
-        run: mvn clean verify
+        run: mvn -B -ntp clean verify
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
